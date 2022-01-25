@@ -5,12 +5,11 @@ import memoizeOne from 'memoize-one'
 import _values from 'lodash/values'
 import _map from 'lodash/map'
 
-import { isElectronApp } from '../../redux/config'
 import timeFrames from '../../util/time_frames'
 
 import rawOrders from '../../orders'
 
-const ALL_ALGO_ORDERS = [
+const algoOrders = [
   MACrossover,
   AccumulateDistribute,
   PingPong,
@@ -18,10 +17,6 @@ const ALL_ALGO_ORDERS = [
   TWAP,
   OCOCO,
 ]
-
-const HOSTED_ALGO_ORDERS = [Iceberg, TWAP]
-
-const algoOrders = isElectronApp ? ALL_ALGO_ORDERS : HOSTED_ALGO_ORDERS
 
 export const getAOs = memoizeOne((t) => _map(algoOrders, ao => ao.meta.getUIDef({
   timeframes: timeFrames,
